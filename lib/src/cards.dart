@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 
@@ -337,15 +338,17 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
   }
 
   // 重置所有卡片
-  void reset({List<Widget>? cards}) {
+  void reset({List<Widget>? cards, bool? refresh}) {
     _cards.clear();
     if (cards != null) {
       _cards.addAll(cards);
     } else {
       _cards.addAll(widget.cards);
     }
-    _swipeInfoList.clear();
-    _frontCardIndex = 0;
+    if (refresh == true) {
+      _swipeInfoList.clear();
+      _frontCardIndex = 0;
+    }
     _resetFrontCard();
   }
 

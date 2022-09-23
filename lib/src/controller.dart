@@ -27,9 +27,9 @@ class TCardController {
     state!.runReverseOrderAnimation();
   }
 
-  get reset => state!.reset;
+  Function get reset => state!.reset;
 
-  get append => state!.append;
+  Function get append => state!.append;
 
   void dispose() {
     state = null;
