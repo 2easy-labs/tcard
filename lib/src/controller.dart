@@ -14,6 +14,18 @@ class TCardController {
 
   int get index => state?.frontCardIndex ?? 0;
 
+  int getRealIndex() {
+    if (state != null) {
+      if (state!.frontCardIndex >= state!.originCardSize) {
+        return state!.frontCardIndex % state!.originCardSize;
+      } else {
+        return state!.frontCardIndex;
+      }
+    } else {
+      return 0;
+    }
+  }
+
   void forward({SwipeDirection? direction}) {
     direction ??=
         Random().nextBool() ? SwipeDirection.Left : SwipeDirection.Right;

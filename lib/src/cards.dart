@@ -65,6 +65,7 @@ class TCard extends StatefulWidget {
 class TCardState extends State<TCard> with TickerProviderStateMixin {
   //  初始的卡片列表
   final List<Widget> _cards = [];
+  int originCardSize = 0;
 
   int get currentCardSize => _cards.length;
 
@@ -354,13 +355,25 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     _cards.clear();
     if (cards != null) {
       _cards.addAll(cards);
+      originCardSize = cards.length;
     } else {
       _cards.addAll(widget.cards);
+      originCardSize = widget.cards.length;
     }
     if (refresh == true) {
+      _frontCardIndex = 0;
       _swipeInfoList.clear();
+    } else {
+      if (_frontCardIndex >= _cards.length) {
+        _frontCardIndex = _frontCardIndex - _cards.length;
+        _swipeInfoList.removeRange(_frontCardIndex, _swipeInfoList.length);
+      }
     }
-    _frontCardIndex = refresh == true ? 0 : _frontCardIndex - _cards.length;
+    _frontCardIndex = refresh == true
+        ? 0
+        : _frontCardIndex >= _cards.length
+            ? _frontCardIndex - _cards.length
+            : _frontCardIndex;
     _resetFrontCard();
   }
 
@@ -418,6 +431,7 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
 
     // 初始化所有传入的卡片
     _cards.addAll(widget.cards);
+    originCardSize = widget.cards.length;
 
     // 绑定控制器
     if (widget.controller != null && widget.controller is TCardController) {
