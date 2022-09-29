@@ -1,7 +1,8 @@
 import 'dart:math';
 
-import 'cards.dart';
-import 'swipe_info.dart';
+import 'package:flutter/cupertino.dart';
+
+import '../tcard.dart';
 
 /// Card controller
 class TCardController {
@@ -13,23 +14,27 @@ class TCardController {
 
   int get index => state?.frontCardIndex ?? 0;
 
-  forward({SwipeDirection? direction}) {
-    if (direction == null) {
-      direction =
-          Random().nextBool() ? SwipeDirection.Left : SwipeDirection.Right;
-    }
+  void forward({SwipeDirection? direction}) {
+    direction ??=
+        Random().nextBool() ? SwipeDirection.Left : SwipeDirection.Right;
 
     state!.swipeInfoList.add(SwipeInfo(state!.frontCardIndex, direction));
     state!.runChangeOrderAnimation();
   }
 
-  back() {
+  void back() {
     state!.runReverseOrderAnimation();
   }
 
-  Function get reset => state!.reset;
+  void reset({List<Widget>? cards, bool? refresh}) {
+    state!.reset(cards: cards, refresh: refresh);
+  }
 
-  Function get append => state!.append;
+  void append(List<Widget> cards) {
+    state!.append(cards);
+  }
+
+  int get itemSize => state!.currentCardSize;
 
   void dispose() {
     state = null;

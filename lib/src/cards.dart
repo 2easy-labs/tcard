@@ -65,27 +65,38 @@ class TCard extends StatefulWidget {
 class TCardState extends State<TCard> with TickerProviderStateMixin {
   //  初始的卡片列表
   final List<Widget> _cards = [];
+
+  int get currentCardSize => _cards.length;
+
   // Card swipe directions
   final List<SwipeInfo> _swipeInfoList = [];
+
   List<SwipeInfo> get swipeInfoList => _swipeInfoList;
 
   //  最前面卡片的索引
   int _frontCardIndex = 0;
+
   int get frontCardIndex => _frontCardIndex;
 
   // 最前面卡片的位置
   Alignment _frontCardAlignment = CardAlignments.front;
+
   // 最前面卡片的旋转角度
   double _frontCardRotation = 0.0;
   double _opacity = 0.0;
+
   // 卡片位置变换动画控制器
   late AnimationController _cardChangeController;
+
   // 卡片位置恢复动画控制器
   late AnimationController _cardReverseController;
+
   // 卡片回弹动画
   late Animation<Alignment> _reboundAnimation;
+
   // 卡片回弹动画控制器
   late AnimationController _reboundController;
+
   //  前面的卡片
   Widget _frontCard(BoxConstraints constraints) {
     Widget child =
@@ -274,11 +285,12 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
       return;
     }
 
-    _cardChangeController.reset();
-    _cardChangeController.forward();
+    _cardChangeController
+      ..reset()
+      ..forward();
   }
 
-  get runChangeOrderAnimation => _runChangeOrderAnimation;
+  void runChangeOrderAnimation() => _runChangeOrderAnimation;
 
   // 运行卡片后退动画
   void _runReverseOrderAnimation() {
@@ -295,7 +307,7 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     _cardReverseController.forward();
   }
 
-  get runReverseOrderAnimation => _runReverseOrderAnimation;
+  void runReverseOrderAnimation() => _runReverseOrderAnimation;
 
   // 向前动画完成后执行
   void _forwardCallback() {
