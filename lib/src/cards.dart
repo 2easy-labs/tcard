@@ -359,8 +359,8 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     }
     if (refresh == true) {
       _swipeInfoList.clear();
-      _frontCardIndex = 0;
     }
+    _frontCardIndex = refresh == true ? 0 : _frontCardIndex - _cards.length;
     _resetFrontCard();
   }
 
