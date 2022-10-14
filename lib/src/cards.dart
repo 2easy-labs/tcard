@@ -291,7 +291,9 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
       ..forward();
   }
 
-  void runChangeOrderAnimation() => _runChangeOrderAnimation;
+  void runChangeOrderAnimation() {
+    _runChangeOrderAnimation();
+  }
 
   // 运行卡片后退动画
   void _runReverseOrderAnimation() {
@@ -308,7 +310,9 @@ class TCardState extends State<TCard> with TickerProviderStateMixin {
     _cardReverseController.forward();
   }
 
-  void runReverseOrderAnimation() => _runReverseOrderAnimation;
+  void runReverseOrderAnimation() {
+    _runReverseOrderAnimation();
+  }
 
   // 向前动画完成后执行
   void _forwardCallback() {
